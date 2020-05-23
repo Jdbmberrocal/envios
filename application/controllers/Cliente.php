@@ -24,7 +24,7 @@ class Cliente extends CI_Controller {
 	{
         $data = array(
             'titulo' => 'Clientes', 
-            'pagina' => 'Editar Cliente'
+            'pagina' => 'Agregar Cliente'
         );
         $this->load->model('ClienteModel');
         $this->load->library('form_validation');
@@ -61,6 +61,7 @@ class Cliente extends CI_Controller {
 		
 		if($this->form_validation->run())
 		{
+            $fecha = date('Y-m-d');
 			
 			$data = array(
 				'nombre' => $nombre,

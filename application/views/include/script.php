@@ -7,7 +7,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="<?=base_url('plantilla/')?>assets/js/demo.js"></script>
 
-    <?php if(($this->uri->segment(1) == 'camiones' || $this->uri->segment(1) == 'conductor' || $this->uri->segment(1) == 'mantenimiento') &&  $this->uri->segment(2) == ''): ?>
+    <?php if(($this->uri->segment(1) == 'camiones' || $this->uri->segment(1) == 'conductor' || $this->uri->segment(1) == 'mantenimiento' || $this->uri->segment(1) == 'cliente' || $this->uri->segment(1) == 'pedidos' || $this->uri->segment(1) == 'zona') &&  $this->uri->segment(2) == ''): ?>
 
         <!-- DataTables -->
         <script src="<?=base_url('plantilla/')?>assets/datatables/jquery.dataTables.min.js"></script>
