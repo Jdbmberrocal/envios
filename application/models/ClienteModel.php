@@ -15,6 +15,20 @@ class ClienteModel extends CI_Model {
         }
         
     }
+    
+    public function getTotalClientes()
+    {
+        $result = $this->db->query("SELECT COUNT(*) as 'total_clientes' FROM clientes");
+        if($result)
+        {
+            return $result->row();
+        }else{
+            return FALSE;
+        }
+        
+    }
+
+
 
     public function getClienteId($idclientes)
     {

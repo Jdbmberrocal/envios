@@ -28,6 +28,30 @@ class PedidosModel extends CI_Model {
         
     }
 
+    public function getTotalPedidos()
+    {
+        $result = $this->db->query("SELECT COUNT(*) as 'total_pedidos' FROM pedido");
+        if($result)
+        {
+            return $result->row();
+        }else{
+            return FALSE;
+        }
+        
+    }
+    
+    public function getUltimosPedidosRealizados()
+    {
+        $result = $this->db->query("SELECT pr.nombre, pr.codigo, pd.codigo_factura, c.nombre as 'cnombre', c.apellidos FROM pedido pd, productos pr, clientes c WHERE pr.idproductos = pd.idproductos AND c.idclientes = pd.idclientes ORDER BY pd.idpedido ASC LIMIT 7 ");
+        if($result)
+        {
+            return $result->result();
+        }else{
+            return FALSE;
+        }
+        
+    }
+
     public function getPedidoId($idpedido)
     {
         $this->db->where('idpedido',$idpedido);

@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CamionesModel extends CI_Model {
+class ProductosModel extends CI_Model {
 
 
     public function list()
     {
-        $result = $this->db->get('camion');
+        $result = $this->db->get('usuario');
         if($result)
         {
             return $result->result();
@@ -16,9 +16,10 @@ class CamionesModel extends CI_Model {
         
     }
 
-    public function getTotalCamiones()
+
+    public function getTotalProductos()
     {
-        $result = $this->db->query("SELECT COUNT(*) as 'total_camiones' FROM camion");
+        $result = $this->db->query("SELECT COUNT(*) as 'total_productos' FROM productos");
         if($result)
         {
             return $result->row();
@@ -27,11 +28,12 @@ class CamionesModel extends CI_Model {
         }
         
     }
-
-    public function getCamionId($idcamion)
+    
+   
+    public function getUsuarioId($idusuario)
     {
-        $this->db->where('idcamion',$idcamion);
-        $result = $this->db->get('camion');
+        $this->db->where('idusuario',$idusuario);
+        $result = $this->db->get('usuario');
         if($result)
         {
             return $result->row();
@@ -41,38 +43,38 @@ class CamionesModel extends CI_Model {
     }
 
 
-    public function addCamion($data)
+    public function addUsuario($data)
     {
-        if ($this->db->insert('camion',$data)) {
+        if ($this->db->insert('usuario',$data)) {
             return true;
         }else{
             return false;
         }
     }
 
-  public function addCamionId($data)
+  public function addUsuarioId($data)
   {
-      if ($this->db->insert('camion',$data)) {
+      if ($this->db->insert('usuario',$data)) {
           return $this->db->insert_id();
       }else{
           return false;
       }
   }
 
-  public function update($idcamion, $data)
+  public function update($idusuario, $data)
   {
-      $this->db->where('idcamion',$idcamion);
-      if ($this->db->update('camion',$data)) {
+      $this->db->where('idusuario',$idusuario);
+      if ($this->db->update('usuario',$data)) {
           return true;
       }else{
           return false;
       }
   }
 
-  public function delete($idcamion)
+  public function delete($idusuario)
   {
-      $this->db->where('idcamion',$idcamion);
-      if ($this->db->delete('camion')) {
+      $this->db->where('idusuario',$idusuario);
+      if ($this->db->delete('usuario')) {
           return true;
       }else{
           return false;

@@ -15,11 +15,18 @@ class Panel extends CI_Controller {
             'pagina' => 'Reporte total del sistema'
         );
         $this->load->model('CamionesModel');
+        $this->load->model('ClienteModel');
+        $this->load->model('ProductosModel');
+        $this->load->model('PedidosModel');
 		$this->load->view('include/head', $data);
 		$this->load->view('include/barra');
         $this->load->view('include/menu');
-        //$data['camiones'] = $this->CamionesModel->list();
-		$this->load->view('panel/principal');
+        $data['camion'] = $this->CamionesModel->getTotalCamiones();
+        $data['cliente'] = $this->ClienteModel->getTotalClientes();
+        $data['producto'] = $this->ProductosModel->getTotalProductos();
+        $data['pedido'] = $this->PedidosModel->getTotalPedidos();
+        $data['pedido_realizados'] = $this->PedidosModel->getUltimosPedidosRealizados();
+		$this->load->view('panel/principal', $data);
         $this->load->view('include/footer');
         $this->load->view('include/script');
     }
