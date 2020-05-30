@@ -51,6 +51,30 @@ class PedidosModel extends CI_Model {
         }
         
     }
+    
+    public function getProductosPorCategorias()
+    {
+        $result = $this->db->query("SELECT categoria, COUNT(*) as 'cantidad' FROM productos WHERE 1 GROUP BY categoria");
+        if($result)
+        {
+            return $result->result();
+        }else{
+            return FALSE;
+        }
+        
+    }
+    
+    public function getNumeroPedidosEntre2000Y2020()
+    {
+        $result = $this->db->query("SELECT YEAR(fecha_carga) as 'anio', COUNT(*) as 'num_pedidos' FROM pedido WHERE YEAR(fecha_carga) BETWEEN '2000' AND '2020' GROUP BY YEAR(fecha_carga)");
+        if($result)
+        {
+            return $result->result();
+        }else{
+            return FALSE;
+        }
+        
+    }
 
     public function getPedidoId($idpedido)
     {

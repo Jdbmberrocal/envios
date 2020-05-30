@@ -18,6 +18,7 @@ class Panel extends CI_Controller {
         $this->load->model('ClienteModel');
         $this->load->model('ProductosModel');
         $this->load->model('PedidosModel');
+        $this->load->model('MantenimientoModel');
 		$this->load->view('include/head', $data);
 		$this->load->view('include/barra');
         $this->load->view('include/menu');
@@ -26,8 +27,11 @@ class Panel extends CI_Controller {
         $data['producto'] = $this->ProductosModel->getTotalProductos();
         $data['pedido'] = $this->PedidosModel->getTotalPedidos();
         $data['pedido_realizados'] = $this->PedidosModel->getUltimosPedidosRealizados();
+        $data['produ_categorias'] = $this->PedidosModel->getProductosPorCategorias();
+        $data['pedidos_anio'] = $this->PedidosModel->getNumeroPedidosEntre2000Y2020();
+        $data['mant_por_anio'] = $this->MantenimientoModel->getMantenimientosEntre2010Y2020();
 		$this->load->view('panel/principal', $data);
         $this->load->view('include/footer');
-        $this->load->view('include/script');
+        $this->load->view('include/script', $data);
     }
 }

@@ -41,5 +41,155 @@
 
     <?php endif; ?>
 
+    <?php if($this->uri->segment(1) == 'panel'): ?>
+
+        <!-- Chart.js -->
+        <script src="<?=base_url('plantilla/')?>assets/chart.js/Chart.min.js"></script>
+
+        <script>
+            $(function () {
+                'use strict'
+
+                var ticksStyle = {
+                    fontColor: '#495057',
+                    fontStyle: 'bold'
+                }
+
+                var mode      = 'index'
+                var intersect = true
+
+                var $salesChart = $('#sales-chart')
+                var salesChart  = new Chart($salesChart, {
+                    type   : 'bar',
+                    data   : {
+                    labels  : [
+                        <?php foreach($pedidos_anio as $pa): ?> 
+                        '<?=$pa->anio?>',
+                        <?php endforeach; ?>
+                    ],
+                    datasets: [
+                        {
+                        backgroundColor: '#007bff',
+                        borderColor    : '#007bff',
+                        data           : [
+                            <?php foreach($pedidos_anio as $pa): ?> 
+                            <?=$pa->num_pedidos?>,
+                            <?php endforeach; ?>
+                        ]
+                        }
+                    ]
+                    },
+                    options: {
+                    maintainAspectRatio: false,
+                    tooltips           : {
+                        mode     : mode,
+                        intersect: intersect
+                    },
+                    hover              : {
+                        mode     : mode,
+                        intersect: intersect
+                    },
+                    legend             : {
+                        display: false
+                    },
+                    scales             : {
+                        yAxes: [{
+                        // display: false,
+                        gridLines: {
+                            display      : true,
+                            lineWidth    : '4px',
+                            color        : 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks    : $.extend({
+                            beginAtZero: true,
+
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                            if (value >= 1000) {
+                                value /= 1000
+                                value += 'k'
+                            }
+                            return  value
+                            }
+                        }, ticksStyle)
+                        }],
+                        xAxes: [{
+                        display  : true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks    : ticksStyle
+                        }]
+                    }
+                    }
+                })
+
+                var $visitorsChart = $('#visitors-chart')
+                var visitorsChart  = new Chart($visitorsChart, {
+                    data   : {
+                    //labels  : ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
+                    labels  : [
+                        <?php foreach($mant_por_anio as $mpa): ?> 
+                        '<?=$mpa->anio?>',
+                        <?php endforeach; ?>
+                        ],
+                    datasets: [{
+                        type                : 'line',
+                        data                : [
+                            <?php foreach($mant_por_anio as $mpa): ?> 
+                            <?=$mpa->cantidad?>,
+                            <?php endforeach; ?>
+                        ],
+                        backgroundColor     : 'transparent',
+                        borderColor         : '#007bff',
+                        pointBorderColor    : '#007bff',
+                        pointBackgroundColor: '#007bff',
+                        fill                : false
+                        // pointHoverBackgroundColor: '#007bff',
+                        // pointHoverBorderColor    : '#007bff'
+                    }]
+                    },
+                    options: {
+                    maintainAspectRatio: false,
+                    tooltips           : {
+                        mode     : mode,
+                        intersect: intersect
+                    },
+                    hover              : {
+                        mode     : mode,
+                        intersect: intersect
+                    },
+                    legend             : {
+                        display: false
+                    },
+                    scales             : {
+                        yAxes: [{
+                        // display: false,
+                        gridLines: {
+                            display      : true,
+                            lineWidth    : '4px',
+                            color        : 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks    : $.extend({
+                            beginAtZero : true,
+                            suggestedMax: 20
+                        }, ticksStyle)
+                        }],
+                        xAxes: [{
+                        display  : true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks    : ticksStyle
+                        }]
+                    }
+                    }
+                })
+            })
+        </script>
+    <?php endif; ?>
+
 </body>
 </html>

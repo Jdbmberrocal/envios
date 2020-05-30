@@ -1,0 +1,35 @@
+INSTRUCCIONES DE INTALACIÓN
+1: Para correr el proyecto debe tener instalado XAMPP
+2: Dirijase a la ruta 'application/config/config.php' en la linea 26 debe colocar la url del proyecto asi como se muestra a continuación: $config['base_url'] = 'http://localhost/envios/';
+3: Dirijase a la ruta 'application/config/database.php' en las lineas 79 a la 81 debe configurar la conexión a la base datos
+
+
+
+
+
+
+
+
+
+CONSULTAS
+
+- Consulta 1: SELECT COUNT(*) as 'total_camiones' FROM camion
+- Consulta 2: SELECT COUNT(*) as 'total_clientes' FROM clientes
+- Consulta 3: SELECT c.idconductor, ca.placa, c.nombre, c.apellidos, c.celular, c.fecha_nacimiento FROM conductor c, camion ca WHERE ca.idcamion = c.idcamion
+- Consulta 4: SELECT idusuario, nombre_usuario, tipo FROM usuario WHERE nombre_usuario = 'orey' AND contrasena = '7c4a8d09ca3762af61e59520943dc26494f8941b' 
+- Consulta 5: SELECT cm.idcontrolmantenimiento, c.placa, cm.fecha, cm.descripcion FROM controlmantenimiento cm, camion c WHERE c.idcamion = cm.idcamion 
+- Consulta 6: SELECT YEAR(fecha) as 'anio', COUNT(*) as 'cantidad' FROM controlmantenimiento WHERE YEAR(fecha) BETWEEN '2010' AND '2020' GROUP BY YEAR(fecha)
+- Consulta 7: SELECT p.idpedido, c.nombre as 'nom_cliente', c.apellidos as 'ape_cliente', cd.nombre as 'nom_conductor', cd.apellidos as 'ape_conductor', u.nombre_usuario, p.codigo_factura, p.kg, p.fecha_carga, p.hora_carga, p.estado, p.observaciones, p.fecha_descarga, p.hora_descarga FROM pedido p, clientes c, conductor cd, usuario u WHERE c.idclientes = p.idclientes AND cd.idconductor = p.idconductor AND u.idusuario = p.idusuario
+- Consulta 8: SELECT p.idpedido, c.nombre as 'nom_cliente', c.apellidos as 'ape_cliente', cd.nombre as 'nom_conductor', cd.apellidos as 'ape_conductor', u.nombre_usuario, p.codigo_factura, p.kg, p.fecha_carga, p.hora_carga, p.estado, p.observaciones, p.fecha_descarga, p.hora_descarga FROM pedido p, clientes c, conductor cd, usuario u WHERE c.idclientes = p.idclientes AND cd.idconductor = p.idconductor AND u.idusuario = p.idusuario AND p.idpedido = 1
+- Consulta 9: SELECT COUNT(*) as 'total_pedidos' FROM pedido
+- Consulta 10: SELECT pr.nombre, pr.codigo, pd.codigo_factura, c.nombre as 'cnombre', c.apellidos FROM pedido pd, productos pr, clientes c WHERE pr.idproductos = pd.idproductos AND c.idclientes = pd.idclientes ORDER BY pd.idpedido ASC LIMIT 7
+- Consulta 11: SELECT categoria, COUNT(*) as 'cantidad' FROM productos WHERE 1 GROUP BY categoria
+- Consulta 12: SELECT YEAR(fecha_carga) as 'anio', COUNT(*) as 'num_pedidos' FROM pedido WHERE YEAR(fecha_carga) BETWEEN '2000' AND '2020' GROUP BY YEAR(fecha_carga)
+- Consulta 13: SELECT nombre, apellidos FROM clientes UNION SELECT nombre, apellidos FROM usuario
+- Consulta 14: SELECT categoria, COUNT(*) as 'cantidad' FROM productos GROUP BY categoria
+- Consulta 15: SELECT pr.nombre, p.fecha_carga FROM pedido p, productos pr WHERE pr.idproductos = p.idproductos ORDER BY p.fecha_carga ASC 
+- Consulta 16: SELECT pr.nombre, codigo_factura, fecha_carga, estado FROM pedido p, productos pr WHERE pr.idproductos = p.idproductos AND p.estado = 'entregado' 
+- Consulta 17: SELECT c.nombre, c.apellidos, ca.placa, COUNT(ca.placa) as 'numero_camiones' FROM conductor c, camion ca WHERE ca.idcamion = c.idcamion GROUP BY ca.placa HAVING COUNT(ca.placa) = 3 
+- Consulta 18: SELECT nombre, apellidos, correo FROM clientes WHERE correo LIKE '%gmail%' 
+- Consulta 19: SELECT COUNT(*) as 'numero_correos_hotmail' FROM clientes WHERE correo LIKE '%hotmail%' 
+- Consulta 20: SELECT nombre, codigo_postal, costo FROM zona WHERE costo BETWEEN 2500 AND 6000 
